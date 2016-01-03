@@ -1,0 +1,19 @@
+---
+# see http://docs.grafana.org/installation/debian/
+- name: install the libfontconfig
+  apt: name=libfontconfig1 state=latest force=yes
+
+- name: check if file exists
+  stat: path=~/grafana_latest_amd64.deb
+  register: gafana_latest
+
+- name: get package of grafana from official
+  get_url: url=https://grafanarel.s3.amazonaws.com/builds/grafana_latest_amd64.deb
+           dest=~/grafana_latest_amd64.deb
+  when: not gafana_latest.stat.exists
+
+- name: install grafana
+  shell: dpkg -i ~/grafana_latest_amd64.deb
+
+- name: start grafana-server
+  service: name=grafana-server state=restarted

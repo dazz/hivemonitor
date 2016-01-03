@@ -1,0 +1,8 @@
+---
+influxdb:
+  dbname: testdb
+  username: root
+  password: root
+
+mosquitto:
+  log_dest: syslog

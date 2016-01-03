@@ -1,0 +1,44 @@
+---
+- name: Set locale
+  locale_gen: name=en_US state=present
+  locale_gen: name=en_US.UTF-8 state=present
+
+# http://ubuntuforums.org/showthread.php?t=1720356
+- name: Set Language
+  lineinfile: dest=/etc/environment line='LC_ALL="en_US.utf8"'
+
+- name: install common packages debian/ubuntu
+  apt: pkg={{ item }} state=latest
+  with_items:
+#    - build-essential
+#    - git
+    - htop
+    - vim
+    - tree
+    - zsh
+  when: ansible_os_family == "Debian"
+
+- name: set ZSH as default shell
+  shell: chsh -s $(which zsh)
+
+- name: Add aliases
+  lineinfile: dest=/home/vagrant/.zshrc line="{{ item }}"
+  with_items:
+    - "export TERM=xterm-color"
+    - "export LS_OPTS='--color=auto'"
+    - "# Aliases"
+    - "alias  ls='ls ${LS_OPTS}'"
+    - "alias  ll='ls -la ${LS_OPTS}'"
+    - "# Helpers"
+    - "ENABLE_CORRECTION='true'"
+    - "COMPLETION_WAITING_DOTS='true'"
+    - "DISABLE_UNTRACKED_FILES_DIRTY='true'"
+    - "HIST_STAMPS='yyyy-mm-dd'"
+    - "# Prompt"
+    - "PS1='$> '"
+
+# TODO: install and setup supervisor
+# http://supervisord.org/running.html#running-supervisord
+#http://docs.ansible.com/ansible/supervisorctl_module.html
+- name: install supervisorctl
+  apt: pkg=supervisor state=latest

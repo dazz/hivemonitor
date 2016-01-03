@@ -1,0 +1,12 @@
+---
+- hosts: all
+  sudo: yes
+  vars_files:
+    - 'vars/all.yml'
+  roles:
+#    - common
+#    - supervisord
+#    - influxdb
+#    - grafana
+    - mosquitto
+#    - couchdb

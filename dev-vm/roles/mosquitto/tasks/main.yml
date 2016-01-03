@@ -1,0 +1,18 @@
+---
+- name: install mosquitto
+  apt: name=mosquitto state=latest
+  tags: mosquitto
+
+- name: write configuration
+  template: src=mosquitto.conf.j2 dest=/etc/mosquitto/mosquitto.conf
+  notify:
+    - restart mosquitto
+  tags:
+    - mosquitto
+
+- name: setup as startup service
+  service: name=mosquitto state=started enabled=yes
+  tags:
+    - mosquitto
+
+# http://openenergymonitor.org/emon/node/11821
