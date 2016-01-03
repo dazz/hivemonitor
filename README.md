@@ -44,7 +44,7 @@ MQTT is the best way to let interested parties know that something interesting h
 
 ### Setup
 
-* copy `./read_serial_write_mqtt.py` on Raspberry Pi and edit config values
+* copy `script/read_serial_write_mqtt.py` on Raspberry Pi and edit config values
 * optional: install supervisor to always run the script with `apt-get install supervisor` (http://supervisord.org/installing.html)
 * add conf file to [supervisord](https://www.digitalocean.com/community/tutorials/how-to-install-and-manage-supervisor-on-ubuntu-and-debian-vps)
 
@@ -65,7 +65,7 @@ Edit config values in script
 ```
 serial_device="/dev/ttyUSB0"
 serial_baudrate=115200
-mqtt_hostname="siri.visitor.congress.ccc.de"
+mqtt_hostname="192.168.33.56"
 mqtt_port=1883
 ```
 
@@ -96,16 +96,16 @@ Installs:
 
 ```
 mqtt_subscribe = "/#"
-mqtt_host = "siri.visitor.congress.ccc.de"
+mqtt_host = "192.168.33.56"
 mqtt_port=1883
 
-influxdb_host="gigawatt-hilldale-92.c.influxdb.com"
+influxdb_host="192.168.33.56"
 influxdb_port=8086
-influxdb_user="32c3"
-influxdb_password="3c23at32c3"
-influxdb_database="32c3"
+influxdb_user="root"
+influxdb_password=""
+influxdb_database="test"
 influxdb_ssl=True
 influxdb_verify_ssl=True
 ```
 
-### Run `./bin/read_mqtt_write_influx.py`
+### Run `./script/read_mqtt_write_influx.py`
