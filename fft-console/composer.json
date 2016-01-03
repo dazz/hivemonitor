@@ -1,0 +1,27 @@
+{
+    "name": "dazz/hivemonitor",
+    "description": "",
+    "authors": [
+        {
+            "name": "dazz"
+        }
+    ],
+    "require": {
+        "silex/silex": "~1.2",
+        "symfony/console": "~2.8",
+        "sag/sag": "0.8.0.2",
+        "php-ffmpeg/php-ffmpeg": "dev-master"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "dazz\\HiveMonitor\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/easybiblabs/sag"
+        }
+    ]
+}
